@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dqbi5d5p6jlpa"
+path.s3tc="res://.godot/imported/Racetrack_asphalt_c.png-0b67b2e53576ba801ac8a2e5e1f6529f.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "87121dc022128322558892783b40bc86"
+}
+
+[deps]
+
+source_file="res://Blends/Racetrack_asphalt_c.png"
+dest_files=["res://.godot/imported/Racetrack_asphalt_c.png-0b67b2e53576ba801ac8a2e5e1f6529f.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

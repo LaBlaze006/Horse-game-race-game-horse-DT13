@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckygduhv7ykb2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bxli1"]
+
+[sub_resource type="Curve3D" id="Curve3D_garwg"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(105.499, 0, 0, 0, 1, 0, 0, 0, 74.7751, 0, 0, 0)
+mesh = SubResource("BoxMesh_bxli1")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_garwg")

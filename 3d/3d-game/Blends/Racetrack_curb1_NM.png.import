@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://bm64ke0jhoe1d"
+path.s3tc="res://.godot/imported/Racetrack_curb1_NM.png-2f7a6868aaec08f84820d9b67355720a.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "cdb01465606ed0239327a5db7a82762c"
+}
+
+[deps]
+
+source_file="res://Blends/Racetrack_curb1_NM.png"
+dest_files=["res://.godot/imported/Racetrack_curb1_NM.png-2f7a6868aaec08f84820d9b67355720a.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Blends/Racetrack_curb1_NM.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

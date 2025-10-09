@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ofvl3h73bo5y"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_4sbel"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pmrkg"]
+height = 1.19823
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b1y26"]
+height = 1.2
+
+[node name="enemy" type="CharacterBody3D" node_paths=PackedStringArray("raycast")]
+script = ExtResource("1_4sbel")
+raycast = NodePath("RayCast3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_pmrkg")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("CapsuleMesh_b1y26")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(1.5, 0, 0)

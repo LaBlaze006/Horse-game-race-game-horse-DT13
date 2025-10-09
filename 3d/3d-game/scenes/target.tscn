@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://5x3m6fn8t7ah"]
+
+[ext_resource type="PackedScene" uid="uid://cnkm7cop21efp" path="res://scenes/racetrack.tscn" id="1_yivn2"]
+
+[sub_resource type="Animation" id="Animation_up27b"]
+resource_name = "movement"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bn1cw"]
+_data = {
+"movement": SubResource("Animation_up27b")
+}
+
+[node name="target" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.6713, 0, 104.526)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bn1cw")
+}
+
+[node name="Racetrack" parent="AnimationPlayer" instance=ExtResource("1_yivn2")]

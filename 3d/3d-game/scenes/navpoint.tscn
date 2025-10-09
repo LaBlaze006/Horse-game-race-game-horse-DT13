@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjur2tm0ccjlb"]
+
+[ext_resource type="PackedScene" uid="uid://cnkm7cop21efp" path="res://scenes/racetrack.tscn" id="1_7hwk0"]
+
+[sub_resource type="Animation" id="Animation_nw7o5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Target:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-50.9461, 0, 101.092)]
+}
+
+[sub_resource type="Animation" id="Animation_b8mxx"]
+resource_name = "target_move"
+length = 60.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Target:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 20.5, 21.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-50.9461, 0, 101.092), Vector3(-140.436, 0, 121.457), Vector3(-226.658, 0, 156.78), Vector3(-324.105, 0, 135.17), Vector3(-373.411, 0, 25.5785), Vector3(-352.375, 0, -56.8115), Vector3(-140.884, 0, -125.619), Vector3(-100.453, 0, -107.122), Vector3(-90.9426, 0, -48.7704), Vector3(-149.745, 0, 1.46485), Vector3(-225.892, 0, -6.43359), Vector3(-272.61, 0, -0.640915), Vector3(-292.293, 0, 35.0876), Vector3(-267.863, 0, 74.5256), Vector3(-165.359, 0, 66.7674), Vector3(-54.9291, 0, 20.2307), Vector3(32.0191, 0, -81.7087), Vector3(54.6105, 0, -115.22), Vector3(286.831, 0, -93.8059), Vector3(318.058, 0, -38.57), Vector3(309.511, 0, 60.4709), Vector3(275.973, 0, 98.7466), Vector3(-58.264, 0, 98.7466)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fu2ub"]
+_data = {
+"RESET": SubResource("Animation_nw7o5"),
+"target_move": SubResource("Animation_b8mxx")
+}
+
+[node name="Navpoint" type="Node3D"]
+
+[node name="Target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.9461, 0, 101.092)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fu2ub")
+}
+autoplay = "target_move"
+speed_scale = 0.4
+
+[node name="Racetrack" parent="." instance=ExtResource("1_7hwk0")]

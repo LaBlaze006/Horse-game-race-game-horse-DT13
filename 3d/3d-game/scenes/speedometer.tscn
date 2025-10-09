@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyh3pnjcfh7jk"]
+
+[ext_resource type="Texture2D" uid="uid://b4hirh1cphia2" path="res://scenes/Speedometer.png" id="1_vdlmx"]
+[ext_resource type="Texture2D" uid="uid://c54mk83eojccy" path="res://scenes/Speedometer_Needle.png" id="2_n8xrr"]
+
+[node name="Rev-ometer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Rev-ometer" type="Sprite2D" parent="."]
+position = Vector2(265, 227)
+texture = ExtResource("1_vdlmx")
+
+[node name="Rev-ometerNeedle" type="Sprite2D" parent="."]
+position = Vector2(262, 220)
+rotation = 0.571277
+skew = 0.0523598
+texture = ExtResource("2_n8xrr")

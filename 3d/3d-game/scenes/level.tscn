@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dctmrpcgonsh2"]
+
+[ext_resource type="PackedScene" uid="uid://7qyl3wymim0f" path="res://scenes/horse_indiana_jones.tscn" id="1_mwdjy"]
+[ext_resource type="PackedScene" uid="uid://ccal0hvm70arc" path="res://scenes/map.tscn" id="2_grkok"]
+[ext_resource type="PackedScene" uid="uid://cv602qkrr0mja" path="res://scenes/ai_horts.tscn" id="3_v2xc4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nf0ya"]
+sky_top_color = Color(0.774788, 0.200196, 0.310916, 1)
+sky_horizon_color = Color(0.811605, 0.616803, 0.31163, 1)
+
+[sub_resource type="Sky" id="Sky_r2u2j"]
+sky_material = SubResource("ProceduralSkyMaterial_nf0ya")
+
+[sub_resource type="Environment" id="Environment_x181l"]
+background_mode = 2
+sky = SubResource("Sky_r2u2j")
+
+[node name="Race Track 1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -166)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x181l")
+
+[node name="Horse Indiana Jones" parent="." instance=ExtResource("1_mwdjy")]
+transform = Transform3D(0.079938, 0, 0.9968, 0, 1, 0, -0.9968, 0, 0.079938, -48.16, 0.914693, 105.837)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.485237, 0.874383, 0, -0.874383, 0.485237, 0, 15.4015, 0)
+
+[node name="map" parent="." instance=ExtResource("2_grkok")]
+
+[node name="Ai Horts" parent="." instance=ExtResource("3_v2xc4")]
+transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407, -50.2174, 0.851079, 100.956)

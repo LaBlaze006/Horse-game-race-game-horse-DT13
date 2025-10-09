@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bomfox16r6d5"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_tv612"]
+[ext_resource type="PackedScene" uid="uid://bmbgn2lybiebl" path="res://scenes/ui.tscn" id="2_phxox"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_olmbs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fmy8a"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_tv612")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_olmbs")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("CapsuleMesh_fmy8a")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_olmbs")
+
+[node name="UI" parent="." instance=ExtResource("2_phxox")]
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

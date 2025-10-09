@@ -1,0 +1,129 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2a5hsnfmei3u"]
+
+[ext_resource type="Script" path="res://Scripts/door.gd" id="1_6cgl4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t5k7n"]
+size = Vector3(7.56171, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tqnp0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jigw2"]
+size = Vector3(0.272949, 4.84497, 1.81097)
+
+[sub_resource type="Animation" id="Animation_ftd33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/AnimatableBody3D/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_edacs"]
+resource_name = "door_close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/AnimatableBody3D/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_4xnkg"]
+resource_name = "door_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D/AnimatableBody3D/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bkbjo"]
+_data = {
+"RESET": SubResource("Animation_ftd33"),
+"door_close": SubResource("Animation_edacs"),
+"door_open": SubResource("Animation_4xnkg")
+}
+
+[node name="door" type="Area3D" node_paths=PackedStringArray("anim_player")]
+script = ExtResource("1_6cgl4")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00332642, 0, 0)
+shape = SubResource("BoxShape3D_t5k7n")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.957926)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Node3D"]
+transform = Transform3D(0.245655, 0, 0, 0, 4.87639, 0, 0, 0, 1.86306, 0.126206, 0.0153475, 0.934578)
+mesh = SubResource("BoxMesh_tqnp0")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.126206, 0.0153475, 0.934578)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00756836, 0.0125732, 0.0152893)
+shape = SubResource("BoxShape3D_jigw2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bkbjo")
+}
+
+[connection signal="body_entered" from="." to="." method="_player_entered"]
+[connection signal="body_exited" from="." to="." method="_player_exited"]
