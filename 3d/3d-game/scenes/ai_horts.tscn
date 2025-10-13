@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cv602qkrr0mja"]
+[gd_scene load_steps=10 format=4 uid="uid://cv602qkrr0mja"]
 
 [ext_resource type="Script" path="res://ai_horts.gd" id="1_4jhe3"]
 [ext_resource type="Texture2D" uid="uid://dwaxhx62508sc" path="res://Blends/Horse_file2.png" id="2_igtxy"]
@@ -106,14 +106,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_i4pcm")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_bimo1"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12qyf"]
-albedo_color = Color(1, 0.377443, 0.479733, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_eltjb"]
-material = SubResource("StandardMaterial3D_12qyf")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_qrga3"]
 size = Vector3(0.984924, 2.6134, 3.56592)
 
@@ -126,15 +118,6 @@ mesh = SubResource("ArrayMesh_u5r4e")
 skeleton = NodePath("")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.71308, 2.82865)
-shape = SubResource("SphereShape3D_bimo1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.27807)
-visible = false
-mesh = SubResource("SphereMesh_eltjb")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0421448, 1.99431, -0.091798)

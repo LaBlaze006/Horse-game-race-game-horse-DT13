@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjur2tm0ccjlb"]
+[gd_scene load_steps=6 format=3 uid="uid://bjur2tm0ccjlb"]
 
 [ext_resource type="PackedScene" uid="uid://cnkm7cop21efp" path="res://scenes/racetrack.tscn" id="1_7hwk0"]
+[ext_resource type="Script" path="res://scenes/navpoint.gd" id="1_x7vfm"]
 
 [sub_resource type="Animation" id="Animation_nw7o5"]
 length = 0.001
@@ -20,7 +21,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_b8mxx"]
 resource_name = "target_move"
 length = 60.0
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,6 +41,7 @@ _data = {
 }
 
 [node name="Navpoint" type="Node3D"]
+script = ExtResource("1_x7vfm")
 
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.9461, 0, 101.092)
@@ -49,7 +50,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.9461, 0, 101.092)
 libraries = {
 "": SubResource("AnimationLibrary_fu2ub")
 }
-autoplay = "target_move"
-speed_scale = 0.4
+speed_scale = 0.5
 
 [node name="Racetrack" parent="." instance=ExtResource("1_7hwk0")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

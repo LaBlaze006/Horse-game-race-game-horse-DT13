@@ -19,19 +19,53 @@ var camchange = -1
 var num_shots = 0
 var can_shot = true
 var jump = false
-var zoom= false
+var zoom = false
+var lock = true
+var countdown = 3
+var can_countdown = true
 
 func _ready():
 	look_at = global_position
-
+	$\"Rev-ometer/Countdown\".text = str(\"press enter\")
+	
+	
 func _physics_process(delta):
-	steering = move_toward(steering, Input.get_axis(\"ui_left\", \"ui_right\") * max_steer, delta * 0.2)
-	engine_force = Input.get_axis(\"ui_down\", \"ui_up\") * ENGINE_POWER
+	if not lock:
+		steering = move_toward(steering, Input.get_axis(\"ui_left\", \"ui_right\") * max_steer, delta * 0.2)
+		engine_force = Input.get_axis(\"ui_down\", \"ui_up\") * ENGINE_POWER
+	
+	if Input.is_action_just_pressed(\"ui_accept\") and can_countdown:
+		ENGINE_POWER = 250.0
+		look_at
+		camchange = -1
+		num_shots = 0
+		can_shot = true
+		jump = false
+		zoom = false
+		can_countdown = false
+		_lock(3)
+		$\"Rev-ometer/Countdown\".visible = true
+		$\"Rev-ometer/Countdown\".horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		$\"Rev-ometer/Countdown\".text = str(countdown)
+		await get_tree().create_timer(1).timeout
+		countdown -= 1
+		$\"Rev-ometer/Countdown\".text = str(countdown)
+		await get_tree().create_timer(1).timeout
+		countdown -= 1
+		$\"Rev-ometer/Countdown\".text = str(countdown)
+		await get_tree().create_timer(1).timeout
+		$\"Rev-ometer/Countdown\".visible = false
+
 
 
 	if engine_force < 0:
 		engine_force = move_toward(engine_force, 0.001, 0)
-		$\"Rev-ometer/Rev-ometerNeedle\".rotation_degrees = engine_force
+
+
+func _lock(_time):
+	lock = true
+	await get_tree().create_timer(_time).timeout
+	lock = false
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pjsx"]
@@ -213,8 +247,9 @@ mesh = SubResource("ArrayMesh_1oh0j")
 skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.996002, 0.0893289, 0, -0.0893289, 0.996002, 0, 4.43552, 7.22287)
+transform = Transform3D(1, 0, 0, 0, 0.953911, 0.30009, 0, -0.30009, 0.953911, 0, 4.43552, 7.22287)
 current = true
+fov = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0421448, 1.3068, -0.091798)
