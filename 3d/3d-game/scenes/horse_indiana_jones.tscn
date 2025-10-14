@@ -11,18 +11,21 @@
 resource_name = "horse script"
 script/source = "extends VehicleBody3D
 
-const max_steer = 0.8
+const MAX_STEER : float = 0.8
 
-var ENGINE_POWER = 250.0
+var engine_power : float = 250.0
 var look_at
-var camchange = -1
-var num_shots = 0
-var can_shot = true
-var jump = false
-var zoom = false
-var lock = true
-var countdown = 3
-var can_countdown = true
+var camchange : int = -1
+var num_shots : int = 0
+var can_shot : bool = true
+var jump : bool = false
+var zoom : bool = false
+var lock : bool = true
+var countdown : int = 3
+var can_countdown : bool = true
+var can_loop : bool = true
+var number : Array = [1, 2]
+var loop : int = 1
 
 func _ready():
 	look_at = global_position
@@ -30,12 +33,18 @@ func _ready():
 	
 	
 func _physics_process(delta):
+	# Moving
 	if not lock:
-		steering = move_toward(steering, Input.get_axis(\"ui_left\", \"ui_right\") * max_steer, delta * 0.2)
-		engine_force = Input.get_axis(\"ui_down\", \"ui_up\") * ENGINE_POWER
+		steering = move_toward(steering, Input.get_axis(\"ui_left\", \"ui_right\") * MAX_STEER, delta * 0.2)
+		engine_force = Input.get_axis(\"ui_down\", \"ui_up\") * engine_power
+		# Stopping
+	elif engine_force < 0:
+		engine_force = move_toward(engine_force, 0.001, 0)
 	
+	# Countdown
 	if Input.is_action_just_pressed(\"ui_accept\") and can_countdown:
-		ENGINE_POWER = 250.0
+		# Set the variables to false
+		engine_power = 250.0
 		look_at
 		camchange = -1
 		num_shots = 0
@@ -44,6 +53,7 @@ func _physics_process(delta):
 		zoom = false
 		can_countdown = false
 		_lock(3)
+		# Countdown
 		$\"Rev-ometer/Countdown\".visible = true
 		$\"Rev-ometer/Countdown\".horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		$\"Rev-ometer/Countdown\".text = str(countdown)
@@ -56,10 +66,14 @@ func _physics_process(delta):
 		await get_tree().create_timer(1).timeout
 		$\"Rev-ometer/Countdown\".visible = false
 
+# Requirements
+	if can_loop:
+		for loop in range(loop):
+			print(number[loop])
+			loop -= 1
+			can_loop = false
+			
 
-
-	if engine_force < 0:
-		engine_force = move_toward(engine_force, 0.001, 0)
 
 
 func _lock(_time):

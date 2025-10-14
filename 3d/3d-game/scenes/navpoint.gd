@@ -1,7 +1,7 @@
 extends Node3D
 
 
-var lock = true
+var lock : bool = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("ui_accept"):
 		_lock(3.5)
+
 
 func _lock(_time):
 	await get_tree().create_timer(_time).timeout

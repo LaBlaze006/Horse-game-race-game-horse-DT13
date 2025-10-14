@@ -2,8 +2,8 @@ extends CharacterBody3D
 
 @onready var target: Node3D = $"../map/Navpoint/Target"
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
-var can_countdown
-var lock = true
+var can_countdown : bool = true
+var lock : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	#velocity.y = clamp(velocity.y, 0.0, 0.0)
 	look_at(rand_pos)
 	move_and_slide()
+	
 	
 func _lock(_time):
 	await get_tree().create_timer(_time).timeout
