@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjur2tm0ccjlb"]
+[gd_scene load_steps=7 format=3 uid="uid://bjur2tm0ccjlb"]
 
 [ext_resource type="PackedScene" uid="uid://cnkm7cop21efp" path="res://scenes/racetrack.tscn" id="1_7hwk0"]
 [ext_resource type="Script" path="res://scenes/navpoint.gd" id="1_x7vfm"]
@@ -40,6 +40,9 @@ _data = {
 "target_move": SubResource("Animation_b8mxx")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ng2il"]
+size = Vector3(1, 17.925, 49.5548)
+
 [node name="Navpoint" type="Node3D"]
 script = ExtResource("1_x7vfm")
 
@@ -54,6 +57,56 @@ speed_scale = 0.5
 
 [node name="Racetrack" parent="." instance=ExtResource("1_7hwk0")]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Finish_line" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.2693, 0, 108.527)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Finish_line"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.46252, -5.62335)
+shape = SubResource("BoxShape3D_ng2il")
+
+[node name="Midway" type="Area3D" parent="."]
+
+[node name="Checkpoint 1" type="CollisionShape3D" parent="Midway"]
+transform = Transform3D(0.289216, 0, -0.957264, 0, 1, 0, 0.957264, 0, 0.289216, -354.64, 8.46252, 87.2952)
+shape = SubResource("BoxShape3D_ng2il")
+
+[node name="Checkpoint 2" type="CollisionShape3D" parent="Midway"]
+transform = Transform3D(0.471197, 0, 0.882028, 0, 1, 0, -0.882028, 0, 0.471197, -106.621, 8.46252, -33.3658)
+shape = SubResource("BoxShape3D_ng2il")
+
+[node name="Checkpoint 3" type="CollisionShape3D" parent="Midway"]
+transform = Transform3D(0.915065, 0, 0.403306, 0, 1, 0, -0.403306, 0, 0.915065, -106.621, 8.46252, 44.6632)
+shape = SubResource("BoxShape3D_ng2il")
+
+[node name="Checkpoint 4" type="CollisionShape3D" parent="Midway"]
+transform = Transform3D(0.98604, 0, 0.166511, 0, 1, 0, -0.166511, 0, 0.98604, 61.941, 8.46252, -109.375)
+shape = SubResource("BoxShape3D_ng2il")
+
+[node name="Checkpoint 5" type="CollisionShape3D" parent="Midway"]
+transform = Transform3D(0.289216, 0, -0.957264, 0, 1, 0, 0.957264, 0, 0.289216, 316.29, 8.46252, -5.93277)
+shape = SubResource("BoxShape3D_ng2il")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 1072.0
+offset_top = 470.0
+offset_right = 1112.0
+offset_bottom = 493.0
+text = "You win!!! :D"
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = 1074.0
+offset_top = 524.0
+offset_right = 1169.0
+offset_bottom = 547.0
+text = "Time:"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 1121.0
+offset_top = 524.0
+offset_right = 1216.0
+offset_bottom = 547.0
+
+[connection signal="body_entered" from="Finish_line" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Midway" to="." method="_on_midway_body_entered"]

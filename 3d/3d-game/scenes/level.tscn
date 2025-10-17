@@ -41,9 +41,6 @@ transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407
 [node name="Ai Horts9" parent="." instance=ExtResource("3_v2xc4")]
 transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407, -50.2174, 0.851079, 118.9)
 
-[node name="Ai Horts10" parent="." instance=ExtResource("3_v2xc4")]
-transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407, -50.2174, 0.851079, 123.085)
-
 [node name="Ai Horts2" parent="." instance=ExtResource("3_v2xc4")]
 transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407, -50.2174, 0.851079, 97.702)
 
@@ -55,6 +52,3 @@ transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407
 
 [node name="Ai Horts5" parent="." instance=ExtResource("3_v2xc4")]
 transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407, -50.2174, 0.851079, 87.4127)
-
-[node name="Ai Horts6" parent="." instance=ExtResource("3_v2xc4")]
-transform = Transform3D(0.0257407, 0, 0.999669, 0, 1, 0, -0.999669, 0, 0.0257407, -50.2174, 0.851079, 83.6129)

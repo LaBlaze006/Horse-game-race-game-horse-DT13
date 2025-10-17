@@ -11,6 +11,8 @@
 resource_name = "horse script"
 script/source = "extends VehicleBody3D
 
+@onready var global = get_node(\"/root/Global\")
+
 const MAX_STEER : float = 0.8
 
 var engine_power : float = 250.0
@@ -22,14 +24,14 @@ var jump : bool = false
 var zoom : bool = false
 var lock : bool = true
 var countdown : int = 3
-var can_countdown : bool = true
+var can_countdown : bool = false
 var can_loop : bool = true
 var number : Array = [1, 2]
 var loop : int = 1
 
 func _ready():
 	look_at = global_position
-	$\"Rev-ometer/Countdown\".text = str(\"press enter\")
+	$\"Rev-ometer/Countdown\".visible = false
 	
 	
 func _physics_process(delta):
@@ -42,7 +44,7 @@ func _physics_process(delta):
 		engine_force = move_toward(engine_force, 0.001, 0)
 	
 	# Countdown
-	if Input.is_action_just_pressed(\"ui_accept\") and can_countdown:
+	if can_countdown:
 		# Set the variables to false
 		engine_power = 250.0
 		look_at
@@ -52,7 +54,10 @@ func _physics_process(delta):
 		jump = false
 		zoom = false
 		can_countdown = false
+		global.start = true
+		$Button.visible = false
 		_lock(3)
+		_requirement()
 		# Countdown
 		$\"Rev-ometer/Countdown\".visible = true
 		$\"Rev-ometer/Countdown\".horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -65,6 +70,11 @@ func _physics_process(delta):
 		$\"Rev-ometer/Countdown\".text = str(countdown)
 		await get_tree().create_timer(1).timeout
 		$\"Rev-ometer/Countdown\".visible = false
+	# End
+	if global.end: 
+		_lock(3)
+		await get_tree().create_timer(3).timeout
+		get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
 
 # Requirements
 	if can_loop:
@@ -73,13 +83,26 @@ func _physics_process(delta):
 			loop -= 1
 			can_loop = false
 			
+#Restart
+	if Input.is_action_just_pressed(\"Restart\"):
+		get_tree().reload_current_scene()
 
+
+func _requirement():
+	number.shuffle()
+	var num = number[0]
+	number[1] = num
+	number.erase(num)
 
 
 func _lock(_time):
 	lock = true
 	await get_tree().create_timer(_time).timeout
 	lock = false
+
+
+func _on_button_pressed() -> void:
+	can_countdown = true
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4pjsx"]
@@ -298,3 +321,13 @@ wheel_friction_slip = 8.0
 suspension_stiffness = 225.0
 
 [node name="Rev-ometer" parent="." instance=ExtResource("6_6ah2h")]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 764.0
+offset_top = 464.0
+offset_right = 1112.0
+offset_bottom = 629.0
+theme_override_font_sizes/font_size = 101
+text = "Start"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
